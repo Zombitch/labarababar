@@ -58,6 +58,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "allowedHosts": ["dev.front.vinais.ovh", "localhost", "labarababar.fr"]
+          },
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
