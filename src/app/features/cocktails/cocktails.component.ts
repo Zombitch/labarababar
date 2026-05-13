@@ -37,7 +37,7 @@ export class CocktailsComponent implements OnInit {
     { value: 'special',   label: 'Spéciaux',   emoji: '✨', color: '#c084f5' },
     { value: 'mystere',   label: 'Mystère',    emoji: '🤫', color: '#7b68ee' },
     { value: 'warrior',   label: 'Warriors',   emoji: '🎲', color: '#e74c3c' },
-    { value: 'classique', label: 'Classiques', emoji: '🍾', color: '#ffd700' },
+    { value: 'classique', label: 'Classiques', emoji: '🍾', color: '#ffb38a' },
     { value: 'doux',      label: 'Doux',       emoji: '🌸', color: '#ff69b4' },
   ];
 

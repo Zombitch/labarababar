@@ -11,9 +11,10 @@ $pink-neon:    #ff1b8d;
 $pink-glow:    #ff5cb8;
 $pink-dark:    #8b0046;
 
-$gold:         #ffd700;
-$gold-dim:     #c8a400;
-$gold-dark:    #7a6200;
+// Rose-gold : pont doux entre le rose néon et l'ambre
+$gold:         #ffb38a;
+$gold-dim:     #d4825a;
+$gold-dark:    #7a3e28;
 
 $red-curtain:  #8b0000;
 $red-bright:   #cc0000;
@@ -52,7 +53,7 @@ $radius-pill:  999px;
 
 // Shadows / glows
 $glow-pink:    0 0 20px rgba(255, 27, 141, 0.6), 0 0 60px rgba(255, 27, 141, 0.2);
-$glow-gold:    0 0 20px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.2);
+$glow-gold:    0 0 20px rgba(255, 179, 138, 0.6), 0 0 60px rgba(255, 179, 138, 0.2);
 $glow-text:    0 0 10px rgba(255, 27, 141, 0.8), 0 0 30px rgba(255, 27, 141, 0.4);
 
 // Transitions
