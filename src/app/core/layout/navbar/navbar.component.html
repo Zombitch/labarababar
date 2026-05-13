@@ -8,7 +8,8 @@
       </span>
     </a>
 
-    <nav class="navbar__nav" [class.navbar__nav--open]="isMenuOpen()" aria-label="Navigation principale">
+    <!-- Desktop nav (inline) -->
+    <nav class="navbar__nav-desktop" aria-label="Navigation principale">
       <ul class="navbar__links" role="list">
         @for (link of navLinks; track link.path) {
           <li>
@@ -17,16 +18,13 @@
               [routerLink]="link.path"
               routerLinkActive="navbar__link--active"
               [routerLinkActiveOptions]="{ exact: link.exact }"
-              (click)="closeMenu()"
             >
               {{ link.label }}
             </a>
           </li>
         }
       </ul>
-      <a class="navbar__cta" routerLink="/contact" (click)="closeMenu()">
-        Réserver
-      </a>
+      <a class="navbar__cta" routerLink="/contact">Réserver</a>
     </nav>
 
     <button
@@ -34,8 +32,8 @@
       [class.navbar__burger--open]="isMenuOpen()"
       (click)="toggleMenu()"
       [attr.aria-expanded]="isMenuOpen()"
-      aria-controls="main-nav"
-      aria-label="Ouvrir le menu"
+      aria-controls="mobile-nav"
+      [attr.aria-label]="isMenuOpen() ? 'Fermer le menu' : 'Ouvrir le menu'"
     >
       <span class="navbar__burger-bar"></span>
       <span class="navbar__burger-bar"></span>
@@ -43,3 +41,44 @@
     </button>
   </div>
 </header>
+
+<!--
+  Mobile overlay is a SIBLING of <header>, NOT a child.
+  This avoids backdrop-filter on the header creating a new
+  containing block that breaks position:fixed on this overlay.
+-->
+<nav
+  id="mobile-nav"
+  class="navbar__nav-mobile"
+  [class.navbar__nav-mobile--open]="isMenuOpen()"
+  aria-label="Navigation mobile"
+  [attr.aria-hidden]="!isMenuOpen()"
+>
+  <ul class="navbar__links" role="list">
+    @for (link of navLinks; track link.path) {
+      <li>
+        <a
+          class="navbar__link"
+          [routerLink]="link.path"
+          routerLinkActive="navbar__link--active"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
+          (click)="closeMenu()"
+        >
+          {{ link.label }}
+        </a>
+      </li>
+    }
+  </ul>
+  <a class="navbar__cta" routerLink="/contact" (click)="closeMenu()">
+    Réserver
+  </a>
+</nav>
+
+<!-- Backdrop click-outside to close -->
+@if (isMenuOpen()) {
+  <div
+    class="navbar__backdrop"
+    (click)="closeMenu()"
+    aria-hidden="true"
+  ></div>
+}

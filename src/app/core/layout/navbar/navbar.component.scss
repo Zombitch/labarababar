@@ -1,6 +1,7 @@
 @use '../../../../styles/abstracts/variables' as *;
 @use '../../../../styles/abstracts/mixins' as *;
 
+// ─── Header bar ────────────────────────────────────────────
 .navbar {
   position: fixed;
   top: 0;
@@ -8,15 +9,31 @@
   right: 0;
   z-index: $z-navbar;
   padding: $space-lg $space-xl;
-  transition: all $transition-base;
+  transition: padding $transition-base, background $transition-base,
+              border-color $transition-base, box-shadow $transition-base;
   background: transparent;
 
+  // NOTE: backdrop-filter intentionally on ::before so it does NOT
+  // create a new containing block for the mobile overlay sibling.
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(0px);
+    transition: backdrop-filter $transition-base;
+    pointer-events: none;
+    z-index: -1;
+  }
+
   &--scrolled {
-    background: rgba($black, 0.95);
+    background: rgba($black, 0.92);
     padding: $space-md $space-xl;
     border-bottom: 1px solid rgba($pink-neon, 0.2);
     box-shadow: 0 4px 30px rgba($black, 0.8);
-    backdrop-filter: blur(10px);
+
+    &::before {
+      backdrop-filter: blur(10px);
+    }
   }
 
   &__container {
@@ -28,6 +45,7 @@
     gap: $space-xl;
   }
 
+  // ─── Brand ───────────────────────────────────────────────
   &__brand {
     display: flex;
     align-items: center;
@@ -40,6 +58,11 @@
     font-size: 2rem;
     animation: float 4s ease-in-out infinite;
     display: block;
+
+    img {
+      height: 2.5rem;
+      width: auto;
+    }
 
     @media (prefers-reduced-motion: reduce) {
       animation: none;
@@ -70,28 +93,14 @@
     white-space: nowrap;
   }
 
-  &__nav {
+  // ─── Desktop nav (hidden on mobile) ──────────────────────
+  &__nav-desktop {
     display: flex;
     align-items: center;
     gap: $space-2xl;
 
     @media (max-width: #{$tablet}) {
-      position: fixed;
-      inset: 0;
-      background: rgba($black, 0.98);
-      flex-direction: column;
-      justify-content: center;
-      gap: $space-2xl;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateX(100%);
-      transition: all $transition-slow;
-
-      &--open {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(0);
-      }
+      display: none;
     }
   }
 
@@ -102,7 +111,7 @@
 
     @media (max-width: #{$tablet}) {
       flex-direction: column;
-      gap: $space-lg;
+      gap: $space-xl;
     }
   }
 
@@ -118,8 +127,8 @@
     position: relative;
 
     @media (max-width: #{$tablet}) {
-      font-size: 1.5rem;
-      letter-spacing: 0.08em;
+      font-size: 1.6rem;
+      letter-spacing: 0.06em;
     }
 
     &::after {
@@ -137,10 +146,7 @@
     &:hover,
     &--active {
       color: $white;
-
-      &::after {
-        width: 100%;
-      }
+      &::after { width: 100%; }
     }
 
     &--active {
@@ -156,10 +162,11 @@
 
     @media (max-width: #{$tablet}) {
       font-size: 1rem;
-      padding: $space-md $space-2xl;
+      padding: $space-md $space-3xl;
     }
   }
 
+  // ─── Burger (mobile only) ─────────────────────────────────
   &__burger {
     display: none;
     flex-direction: column;
@@ -168,7 +175,8 @@
     border: none;
     cursor: pointer;
     padding: $space-sm;
-    z-index: $z-navbar + 1;
+    z-index: $z-navbar + 10;
+    position: relative;
 
     @media (max-width: #{$tablet}) {
       display: flex;
@@ -181,20 +189,59 @@
     height: 2px;
     background: $pink-neon;
     border-radius: $radius-pill;
-    transition: all $transition-base;
+    transition: transform $transition-base, opacity $transition-base;
     box-shadow: 0 0 6px rgba($pink-neon, 0.6);
   }
 
   &__burger--open {
-    .navbar__burger-bar:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
+    .navbar__burger-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .navbar__burger-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .navbar__burger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+}
+
+// ─── Mobile overlay — SIBLING of <header>, NOT a child ─────
+// position:fixed here is always relative to the viewport,
+// unaffected by backdrop-filter on the navbar.
+.navbar__nav-mobile {
+  display: none;
+
+  @media (max-width: #{$tablet}) {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: $z-navbar + 5;
+    background: rgba($black, 0.98);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2xl;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: opacity $transition-slow,
+                visibility $transition-slow,
+                transform $transition-slow;
+
+    &--open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
     }
-    .navbar__burger-bar:nth-child(2) {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-    .navbar__burger-bar:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
+  }
+}
+
+// ─── Backdrop (click outside to close) ─────────────────────
+.navbar__backdrop {
+  display: none;
+
+  @media (max-width: #{$tablet}) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: $z-navbar + 4;
+    background: transparent;
+    cursor: pointer;
   }
 }
