@@ -1,0 +1,45 @@
+<header class="navbar" [class.navbar--scrolled]="isScrolled()">
+  <div class="navbar__container">
+    <a class="navbar__brand" routerLink="/" (click)="closeMenu()" aria-label="La Bar à Babar — Accueil">
+      <span class="navbar__brand-icon" aria-hidden="true"><img src="logo_labarababar.png" alt="logo"/></span>
+      <span class="navbar__brand-text">
+        <span class="navbar__brand-la">La</span>
+        <span class="navbar__brand-name">Bar à Babar</span>
+      </span>
+    </a>
+
+    <nav class="navbar__nav" [class.navbar__nav--open]="isMenuOpen()" aria-label="Navigation principale">
+      <ul class="navbar__links" role="list">
+        @for (link of navLinks; track link.path) {
+          <li>
+            <a
+              class="navbar__link"
+              [routerLink]="link.path"
+              routerLinkActive="navbar__link--active"
+              [routerLinkActiveOptions]="{ exact: link.exact }"
+              (click)="closeMenu()"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+      <a class="navbar__cta" routerLink="/contact" (click)="closeMenu()">
+        Réserver
+      </a>
+    </nav>
+
+    <button
+      class="navbar__burger"
+      [class.navbar__burger--open]="isMenuOpen()"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen()"
+      aria-controls="main-nav"
+      aria-label="Ouvrir le menu"
+    >
+      <span class="navbar__burger-bar"></span>
+      <span class="navbar__burger-bar"></span>
+      <span class="navbar__burger-bar"></span>
+    </button>
+  </div>
+</header>

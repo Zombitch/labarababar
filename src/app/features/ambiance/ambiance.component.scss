@@ -1,0 +1,382 @@
+@use '../../../styles/abstracts/variables' as *;
+@use '../../../styles/abstracts/mixins' as *;
+
+.ambiance-page {
+  min-height: 100dvh;
+  padding-top: 80px;
+}
+
+// Header
+.ambiance-header {
+  position: relative;
+  padding: $space-4xl $space-xl $space-3xl;
+  text-align: center;
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background: $black-soft;
+    z-index: 0;
+  }
+
+  &__curtain {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 30%;
+    background: linear-gradient(to bottom, $red-curtain, rgba($red-curtain, 0.3));
+    opacity: 0.4;
+
+    &--left {
+      left: 0;
+      border-radius: 0 0 80% 0;
+    }
+
+    &--right {
+      right: 0;
+      border-radius: 0 0 0 80%;
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $gold;
+    text-shadow: 0 0 10px rgba($gold, 0.5);
+    margin-bottom: $space-md;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    color: $white;
+    margin-bottom: $space-md;
+  }
+
+  &__subtitle {
+    color: $gray-light;
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: $space-lg;
+  }
+}
+
+.accent-pink {
+  @include neon-text($pink-neon);
+}
+
+.accent-gold {
+  color: $gold;
+  text-shadow: 0 0 10px rgba($gold, 0.5);
+}
+
+// Concept
+.ambiance-concept {
+  @include section-padding;
+  background: $black;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-4xl;
+    align-items: center;
+
+    @media (max-width: #{$tablet}) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: $space-lg;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+    color: $white;
+    line-height: 1.2;
+  }
+
+  p {
+    color: $gray-light;
+    line-height: 1.8;
+
+    strong { color: $white; }
+    em { color: $pink-glow; font-style: italic; }
+  }
+
+  &__quote {
+    border-left: 4px solid $pink-neon;
+    padding: $space-md $space-lg;
+    margin: 0;
+    background: rgba($pink-neon, 0.05);
+    border-radius: 0 $radius-md $radius-md 0;
+    font-family: $font-display;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: $pink-glow;
+    box-shadow: 0 0 20px rgba($pink-neon, 0.1);
+  }
+
+  &__neon-box {
+    @include flex-col-center;
+    gap: $space-xl;
+  }
+
+  &__neon-sign {
+    text-align: center;
+    background: rgba($black, 0.7);
+    border: 4px solid $pink-neon;
+    border-radius: $radius-md;
+    padding: $space-3xl $space-4xl;
+    box-shadow: $glow-pink, inset 0 0 40px rgba($pink-neon, 0.05);
+    animation: neonPulse 3s ease-in-out infinite alternate;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  &__stars {
+    display: flex;
+    gap: $space-lg;
+    font-size: 1.5rem;
+  }
+}
+
+.ambiance-neon-text {
+  font-family: $font-display;
+  font-weight: 900;
+  font-size: 3rem;
+  @include neon-text($pink-neon);
+  display: block;
+  letter-spacing: 0.1em;
+
+  &--small {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: $gold;
+    text-shadow: 0 0 10px rgba($gold, 0.6);
+  }
+}
+
+// Decor grid
+.ambiance-decor {
+  @include section-padding;
+  background: $black-soft;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-xl;
+
+    @media (max-width: #{$desktop}) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: #{$mobile}) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item {
+    background: $black-card;
+    border: 1px solid rgba($pink-neon, 0.1);
+    border-radius: $radius-lg;
+    padding: $space-2xl $space-xl;
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+    text-align: center;
+    transition: all $transition-base;
+
+    &:hover {
+      border-color: rgba($pink-neon, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba($black, 0.5);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &:hover { transform: none; }
+    }
+
+    &--featured {
+      border-color: rgba($pink-neon, 0.3);
+      background: linear-gradient(135deg, rgba($pink-dark, 0.3), $black-card);
+    }
+
+    h3 {
+      font-family: $font-display;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $white;
+    }
+
+    p {
+      color: $gray-light;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+  }
+
+  &__icon {
+    font-size: 2.5rem;
+  }
+}
+
+// Events
+.ambiance-events {
+  position: relative;
+  padding: $space-4xl $space-xl;
+  text-align: center;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba($red-curtain, 0.3), rgba($pink-dark, 0.2), $black);
+    border-top: 1px solid rgba($pink-neon, 0.15);
+    border-bottom: 1px solid rgba($pink-neon, 0.15);
+    z-index: 0;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+    max-width: 700px;
+    margin: 0 auto $space-xl;
+    text-align: left;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    gap: $space-xl;
+    background: rgba($black-card, 0.8);
+    border: 1px solid rgba($pink-neon, 0.15);
+    border-radius: $radius-lg;
+    padding: $space-lg $space-xl;
+    transition: all $transition-base;
+
+    &:hover {
+      border-color: rgba($pink-neon, 0.4);
+    }
+
+    @media (max-width: #{$mobile}) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__day {
+    font-family: $font-display;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $pink-neon;
+    text-align: center;
+  }
+
+  &__info {
+    h3 {
+      font-family: $font-display;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $white;
+      margin-bottom: $space-xs;
+    }
+
+    p {
+      color: $gray-light;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+  }
+
+  &__tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $gold;
+    border: 1px solid rgba($gold, 0.5);
+    border-radius: $radius-pill;
+    padding: 4px $space-sm;
+    white-space: nowrap;
+  }
+
+  &__disclaimer {
+    color: $gray-mid;
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-top: $space-md;
+  }
+}
+
+// CTA
+.ambiance-cta {
+  @include section-padding;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .container {
+    @include flex-col-center;
+    gap: $space-lg;
+  }
+
+  &__elephant {
+    font-size: 4rem;
+    display: block;
+    animation: float 5s ease-in-out infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+    color: $white;
+  }
+
+  &__sub {
+    color: $gray-light;
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+
+  &__btns {
+    display: flex;
+    gap: $space-md;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.btn-neon {
+  @include btn-neon;
+}
+
+.btn-gold {
+  @include btn-gold;
+}

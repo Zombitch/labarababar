@@ -1,0 +1,145 @@
+<div class="cocktails-page">
+
+  <!-- Page Header -->
+  <header class="cocktails-header">
+    <div class="cocktails-header__bg" aria-hidden="true"></div>
+    <div class="container cocktails-header__content">
+      <p class="cocktails-header__eyebrow">
+        <span aria-hidden="true">★</span> Sélection du moment <span aria-hidden="true">★</span>
+      </p>
+      <h1 class="cocktails-header__title">
+        La <span class="accent-neon">Carte</span>
+      </h1>
+      <p class="cocktails-header__subtitle">
+        {{ allCocktails().length }} créations douteuses, assumées avec passion
+      </p>
+      <div class="neon-divider"></div>
+    </div>
+  </header>
+
+  <!-- Filters -->
+  <nav class="cocktails-filters" aria-label="Filtres par catégorie">
+    <div class="container">
+      <div class="cocktails-filters__bar" role="list">
+        @for (filter of filters; track filter.value) {
+          <button
+            class="cocktails-filters__btn"
+            [class.cocktails-filters__btn--active]="activeFilter() === filter.value"
+            [style.--cat-color]="filter.color"
+            (click)="setFilter(filter.value)"
+            role="listitem"
+            [attr.aria-pressed]="activeFilter() === filter.value"
+          >
+            <span class="cocktails-filters__btn-emoji" aria-hidden="true">{{ filter.emoji }}</span>
+            <span class="cocktails-filters__btn-label">{{ filter.label }}</span>
+            <span class="cocktails-filters__btn-count" aria-label="{{ countFor(filter.value) }} cocktails">
+              {{ countFor(filter.value) }}
+            </span>
+          </button>
+        }
+      </div>
+    </div>
+  </nav>
+
+  <!-- Result count -->
+  <div class="cocktails-result-bar" aria-live="polite" aria-atomic="true">
+    <div class="container">
+      @if (activeFilter() === 'all') {
+        <span class="cocktails-result-bar__text">
+          Toute la carte — <strong>{{ filteredCocktails().length }} cocktails</strong>
+        </span>
+      } @else {
+        <span class="cocktails-result-bar__text">
+          <span class="cocktails-result-bar__cat">{{ labelFor(activeFilter()) }}</span>
+          — <strong>{{ filteredCocktails().length }} cocktail{{ filteredCocktails().length > 1 ? 's' : '' }}</strong>
+        </span>
+      }
+    </div>
+  </div>
+
+  <!-- Cocktails Grid -->
+  <section
+    class="cocktails-grid-section"
+    [class.cocktails-grid-section--animating]="animating()"
+    aria-label="Liste des cocktails"
+  >
+    <div class="container">
+      @if (filteredCocktails().length === 0) {
+        <div class="cocktails-empty" role="status">
+          <span aria-hidden="true">🐘</span>
+          <p>Aucun cocktail dans cette catégorie pour le moment.</p>
+        </div>
+      } @else {
+        <div class="cocktails-grid">
+          @for (cocktail of filteredCocktails(); track cocktail.id; let i = $index) {
+            <article
+              class="cocktail-card"
+              [style.--accent]="colorFor(cocktail.category)"
+              [style.--delay]="(i % 9) * 50 + 'ms'"
+            >
+              <!-- Top strip color -->
+              <div class="cocktail-card__strip"></div>
+
+              <!-- Header -->
+              <div class="cocktail-card__header">
+                <span class="cocktail-card__emoji" aria-hidden="true">{{ cocktail.emoji }}</span>
+                <div class="cocktail-card__meta">
+                  <span class="cocktail-card__badge">{{ cocktail.badge }}</span>
+                  <span class="cocktail-card__price">{{ cocktail.price }} €</span>
+                </div>
+              </div>
+
+              <!-- Body -->
+              <div class="cocktail-card__body">
+                <h2 class="cocktail-card__name">{{ cocktail.name }}</h2>
+
+                <p class="cocktail-card__warning">
+                  <span aria-hidden="true">⚠️</span>
+                  <em>{{ cocktail.warning }}</em>
+                </p>
+
+                <p class="cocktail-card__desc">{{ cocktail.description }}</p>
+              </div>
+
+              <!-- Ingredients (expandable via CSS :focus-within) -->
+              <details class="cocktail-card__details">
+                <summary class="cocktail-card__details-toggle">
+                  Voir la composition
+                  <span class="cocktail-card__details-arrow" aria-hidden="true">›</span>
+                </summary>
+                <ul class="cocktail-card__ingredients" role="list">
+                  @for (ingredient of cocktail.ingredients; track ingredient) {
+                    <li>{{ ingredient }}</li>
+                  }
+                </ul>
+              </details>
+
+              <!-- Footer -->
+              <div class="cocktail-card__footer">
+                <span
+                  class="cocktail-card__cat-tag"
+                  [style.color]="colorFor(cocktail.category)"
+                  [style.border-color]="colorFor(cocktail.category)"
+                >
+                  {{ labelFor(cocktail.category) }}
+                </span>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <div class="cocktails-disclaimer">
+    <div class="container">
+      <p>
+        <span aria-hidden="true">⚠️</span>
+        L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+        * si pas de contrôle fiscal et pas d'incendie.
+      </p>
+    </div>
+  </div>
+
+</div>

@@ -1,1 +1,113 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'styles/abstracts/variables' as *;
+@use 'styles/abstracts/mixins' as *;
+@use 'styles/base/reset';
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700;900&display=swap');
+
+// Global utility classes
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-xl;
+
+  @include mobile {
+    padding: 0 $space-md;
+  }
+}
+
+.section-title {
+  font-family: $font-display;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: $space-md;
+
+  .accent {
+    @include neon-text($pink-neon);
+  }
+
+  .accent-gold {
+    color: $gold;
+    text-shadow: 0 0 10px rgba($gold, 0.6);
+  }
+}
+
+.section-subtitle {
+  text-align: center;
+  color: $gray-light;
+  font-size: 1.1rem;
+  margin-bottom: $space-3xl;
+  font-style: italic;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Neon divider
+.neon-divider {
+  width: 80px;
+  height: 3px;
+  background: $pink-neon;
+  margin: $space-md auto $space-2xl;
+  box-shadow: $glow-pink;
+  border-radius: $radius-pill;
+}
+
+// Star decoration
+.star-deco {
+  color: $gold;
+  font-size: 1.2rem;
+  text-shadow: 0 0 10px rgba($gold, 0.8);
+  display: inline-block;
+  animation: twinkle 2s ease-in-out infinite alternate;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes twinkle {
+  from { opacity: 0.6; transform: scale(0.9); }
+  to   { opacity: 1;   transform: scale(1.1); }
+}
+
+@keyframes neonPulse {
+  from { opacity: 0.8; }
+  to   { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

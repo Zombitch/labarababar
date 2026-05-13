@@ -1,0 +1,133 @@
+@use '../../../../styles/abstracts/variables' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+
+.footer {
+  background: $black-soft;
+  border-top: 1px solid rgba($pink-neon, 0.3);
+  margin-top: auto;
+
+  &__top {
+    padding: $space-4xl $space-xl $space-3xl;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: $space-3xl;
+
+    @media (max-width: #{$desktop}) {
+      grid-template-columns: 1fr 1fr;
+      gap: $space-2xl;
+    }
+
+    @media (max-width: #{$mobile}) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+
+  &__elephant {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: $space-sm;
+    animation: float 5s ease-in-out infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: $pink-neon;
+    text-shadow: 0 0 10px rgba($pink-neon, 0.5);
+  }
+
+  &__tagline {
+    color: $gray-light;
+    font-size: 0.9rem;
+  }
+
+  &__slogan {
+    color: $gold;
+    font-style: italic;
+    font-size: 0.85rem;
+    font-family: $font-display;
+    margin-top: $space-xs;
+  }
+
+  &__nav-title {
+    font-family: $font-body;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $pink-neon;
+    margin-bottom: $space-lg;
+  }
+
+  &__nav-list,
+  &__drinks-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+
+    a,
+    li {
+      color: $gray-light;
+      font-size: 0.9rem;
+      transition: color $transition-base;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: $white;
+    }
+  }
+
+  &__address {
+    font-style: normal;
+    color: $gray-light;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: $space-md;
+  }
+
+  &__hours {
+    color: $gray-light;
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+
+  &__label {
+    color: $gold-dim;
+    font-weight: 700;
+  }
+
+  &__bottom {
+    padding: $space-lg $space-xl;
+    border-top: 1px solid rgba($white, 0.05);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+  }
+
+  &__legal {
+    color: $gray-mid;
+    font-size: 0.8rem;
+  }
+
+  &__disclaimer {
+    color: $gray-mid;
+    font-size: 0.75rem;
+    font-style: italic;
+  }
+}

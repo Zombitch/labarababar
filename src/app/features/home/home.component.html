@@ -1,0 +1,197 @@
+<!-- HERO SECTION -->
+<section class="hero" aria-label="Bienvenue à La Bar à Babar">
+  <div class="hero__bg-stars" aria-hidden="true">
+    @for (star of [1,2,3,4,5,6,7,8,9,10,11,12]; track star) {
+      <span class="hero__star" [style.--i]="star">★</span>
+    }
+  </div>
+
+  <div class="hero__content container">
+    <div class="hero__left">
+      <p class="hero__eyebrow">
+        <span aria-hidden="true">★</span> Le bar dégénéré que personne n'attendait <span aria-hidden="true">★</span>
+      </p>
+
+      <div class="hero__logo-frame" aria-hidden="true">
+        <video controls autoplay>
+          <source src="labarababar.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+
+    <div class="hero__right">
+      <h1 class="hero__title">
+        <span class="hero__title-la">La</span>
+        <span class="hero__title-name">Bar à Babar</span>
+      </h1>
+
+      <p class="hero__tagline">
+        "Plus c'est nul, plus ça marche"
+      </p>
+
+      <p class="hero__desc">
+        Bar à ambiance dejantée, strip-tease cirque & humour beauf assumé.
+        On mélange alcool cheap, numéros douteux et décadence joyeusement assumée.
+      </p>
+
+      <div class="hero__ctas">
+        <a class="hero__cta-primary" routerLink="/cocktails">
+          Voir la Carte
+        </a>
+        <a class="hero__cta-secondary" routerLink="/contact">
+          Nous Trouver
+        </a>
+      </div>
+
+      <div class="hero__badges">
+        <span class="hero__badge">🎪 Numéros de cirque ratés</span>
+        <span class="hero__badge">💃 Ambiance cabaret</span>
+        <span class="hero__badge">🍹 Cocktails douteux</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__scroll-hint" aria-hidden="true">
+    <span class="hero__scroll-arrow">↓</span>
+  </div>
+</section>
+
+<!-- CONCEPT SECTION -->
+<section class="concept" id="concept" aria-labelledby="concept-title">
+  <div class="container">
+    <h2 class="section-title" id="concept-title">
+      Le <span class="accent">Concept</span>
+    </h2>
+    <div class="neon-divider" aria-hidden="true"></div>
+    <p class="section-subtitle">Le bar dégénéré que personne n'attendait</p>
+
+    <div class="concept__grid">
+      <article class="concept__card">
+        <span class="concept__icon" aria-hidden="true">🎪</span>
+        <h3 class="concept__card-title">Ambiance Unique</h3>
+        <p>Strip-tease et numéros de cirque ratés. Couloir légendaire : à gauche les toilettes, à droite les branlettes.</p>
+      </article>
+
+      <article class="concept__card concept__card--featured">
+        <span class="concept__icon" aria-hidden="true">🐘</span>
+        <h3 class="concept__card-title">L'Esprit Babar</h3>
+        <p>Déco kitsch & néons, velours rouges, peluches & mauvaises idées. L'éléphant qui ne rougit de rien.</p>
+      </article>
+
+      <article class="concept__card">
+        <span class="concept__icon" aria-hidden="true">🍹</span>
+        <h3 class="concept__card-title">Cocktails Légendaires</h3>
+        <p>Du Babar Splash qui pique jusqu'au JP Chénet Royal. Parce qu'on le vaut bien.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED COCKTAILS -->
+<section class="featured-cocktails" aria-labelledby="cocktails-title">
+  <div class="container">
+    <h2 class="section-title" id="cocktails-title">
+      Nos <span class="accent-gold">Boissons Phares</span>
+    </h2>
+    <div class="neon-divider" aria-hidden="true"></div>
+    <p class="section-subtitle">Sélection artisanale et aléatoire</p>
+
+    <div class="featured-cocktails__grid">
+      @for (cocktail of featuredCocktails(); track cocktail.id) {
+        <article class="cocktail-card">
+          <div class="cocktail-card__badge">{{ cocktail.badge }}</div>
+          <span class="cocktail-card__emoji" aria-hidden="true">{{ cocktail.emoji }}</span>
+          <h3 class="cocktail-card__name">{{ cocktail.name }}</h3>
+          <p class="cocktail-card__warning">⚠️ {{ cocktail.warning }}</p>
+          <p class="cocktail-card__desc">{{ cocktail.description }}</p>
+          <div class="cocktail-card__footer">
+            <span class="cocktail-card__price">{{ cocktail.price }} €</span>
+          </div>
+        </article>
+      }
+    </div>
+
+    <div class="featured-cocktails__cta">
+      <a class="btn-neon" routerLink="/cocktails">Voir toute la carte</a>
+    </div>
+  </div>
+</section>
+
+<!-- AMBIANCE TEASER -->
+<section class="ambiance-teaser" aria-labelledby="ambiance-title">
+  <div class="ambiance-teaser__content">
+    <div class="container">
+      <div class="ambiance-teaser__inner">
+        <div class="ambiance-teaser__text">
+          <h2 class="section-title" id="ambiance-title" style="text-align: left;">
+            Une <span class="accent">Ambiance</span><br>Hors du Commun
+          </h2>
+          <div class="neon-divider" style="margin-left: 0;"></div>
+          <ul class="ambiance-teaser__list" role="list">
+            <li>🎭 Spectacles de cirque (ratés avec style)</li>
+            <li>🌹 Décor velours rouge & néons roses</li>
+            <li>🎵 DJ qui mixe n'importe quoi</li>
+            <li>💫 Clientèle de fêtards assumés</li>
+            <li>🔒 Videur qui a fait de la prison</li>
+          </ul>
+          <a class="btn-gold" routerLink="/ambiance">Découvrir l'ambiance</a>
+        </div>
+        <div class="ambiance-teaser__deco" aria-hidden="true">
+          <div class="ambiance-teaser__neon-sign">
+            <span class="ambiance-teaser__neon-text">OPEN</span>
+            <br>
+            <span class="ambiance-teaser__neon-text ambiance-teaser__neon-text--gold">24h/24*</span>
+            <br>
+            <span class="ambiance-teaser__neon-small">*selon l'humeur</span>
+          </div>
+          <div class="ambiance-teaser__stars">
+            <span class="star-deco" style="--delay: 0s; font-size: 2rem;">★</span>
+            <span class="star-deco" style="--delay: 0.4s; font-size: 1.2rem;">★</span>
+            <span class="star-deco" style="--delay: 0.8s; font-size: 1.6rem;">★</span>
+            <span class="star-deco" style="--delay: 1.2s; font-size: 1rem;">★</span>
+            <span class="star-deco" style="--delay: 1.6s; font-size: 2.4rem;">★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM TEASER -->
+<section class="team" aria-labelledby="team-title">
+  <div class="container">
+    <h2 class="section-title" id="team-title">
+      L'<span class="accent">Équipe</span>
+    </h2>
+    <div class="neon-divider"></div>
+    <p class="section-subtitle">Des professionnels à leur manière</p>
+
+    <div class="team__grid">
+      <article class="team__card">
+        <span class="team__emoji" aria-hidden="true">👑</span>
+        <h3 class="team__role">Le Gérant</h3>
+        <p class="team__desc">Beau / belle gosse (optionnel)</p>
+      </article>
+      <article class="team__card">
+        <span class="team__emoji" aria-hidden="true">🍸</span>
+        <h3 class="team__role">Les Barmans</h3>
+        <p class="team__desc">Alcoolisés mais motivés</p>
+      </article>
+      <article class="team__card">
+        <span class="team__emoji" aria-hidden="true">🦵</span>
+        <h3 class="team__role">Les Artistes</h3>
+        <p class="team__desc">6 à 10 selon la forme. Dont 1 unijambiste star du show.</p>
+      </article>
+      <article class="team__card">
+        <span class="team__emoji" aria-hidden="true">🎧</span>
+        <h3 class="team__role">Le DJ</h3>
+        <p class="team__desc">Mixe n'importe quoi avec conviction</p>
+      </article>
+      <article class="team__card">
+        <span class="team__emoji" aria-hidden="true">💪</span>
+        <h3 class="team__role">Le Videur</h3>
+        <p class="team__desc">A fait de la prison. Ne posez pas de questions.</p>
+      </article>
+    </div>
+  </div>
+</section>

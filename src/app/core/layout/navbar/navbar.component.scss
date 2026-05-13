@@ -1,0 +1,200 @@
+@use '../../../../styles/abstracts/variables' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-navbar;
+  padding: $space-lg $space-xl;
+  transition: all $transition-base;
+  background: transparent;
+
+  &--scrolled {
+    background: rgba($black, 0.95);
+    padding: $space-md $space-xl;
+    border-bottom: 1px solid rgba($pink-neon, 0.2);
+    box-shadow: 0 4px 30px rgba($black, 0.8);
+    backdrop-filter: blur(10px);
+  }
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-xl;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  &__brand-icon {
+    font-size: 2rem;
+    animation: float 4s ease-in-out infinite;
+    display: block;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  &__brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  &__brand-la {
+    font-family: $font-display;
+    font-style: italic;
+    font-size: 0.75rem;
+    color: $gray-light;
+    letter-spacing: 0.05em;
+  }
+
+  &__brand-name {
+    font-family: $font-display;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: $pink-neon;
+    text-shadow: 0 0 10px rgba($pink-neon, 0.6);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: $space-2xl;
+
+    @media (max-width: #{$tablet}) {
+      position: fixed;
+      inset: 0;
+      background: rgba($black, 0.98);
+      flex-direction: column;
+      justify-content: center;
+      gap: $space-2xl;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(100%);
+      transition: all $transition-slow;
+
+      &--open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: $space-xl;
+
+    @media (max-width: #{$tablet}) {
+      flex-direction: column;
+      gap: $space-lg;
+    }
+  }
+
+  &__link {
+    font-family: $font-body;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $gray-light;
+    text-decoration: none;
+    transition: color $transition-base;
+    position: relative;
+
+    @media (max-width: #{$tablet}) {
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: $pink-neon;
+      box-shadow: 0 0 8px $pink-neon;
+      transition: width $transition-base;
+    }
+
+    &:hover,
+    &--active {
+      color: $white;
+
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &--active {
+      color: $pink-neon;
+      text-shadow: 0 0 8px rgba($pink-neon, 0.5);
+    }
+  }
+
+  &__cta {
+    @include btn-neon;
+    font-size: 0.8rem;
+    padding: $space-sm $space-lg;
+
+    @media (max-width: #{$tablet}) {
+      font-size: 1rem;
+      padding: $space-md $space-2xl;
+    }
+  }
+
+  &__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: $space-sm;
+    z-index: $z-navbar + 1;
+
+    @media (max-width: #{$tablet}) {
+      display: flex;
+    }
+  }
+
+  &__burger-bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: $pink-neon;
+    border-radius: $radius-pill;
+    transition: all $transition-base;
+    box-shadow: 0 0 6px rgba($pink-neon, 0.6);
+  }
+
+  &__burger--open {
+    .navbar__burger-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .navbar__burger-bar:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .navbar__burger-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+}
