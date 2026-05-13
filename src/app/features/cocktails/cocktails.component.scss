@@ -1,0 +1,280 @@
+@use '../../../styles/abstracts/variables' as *;
+@use '../../../styles/abstracts/mixins' as *;
+
+.cocktails-page {
+  min-height: 100dvh;
+  padding-top: 80px;
+}
+
+// Header
+.cocktails-header {
+  position: relative;
+  padding: $space-4xl $space-xl $space-2xl;
+  text-align: center;
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 100%, rgba($pink-dark, 0.5) 0%, transparent 70%),
+      $black-soft;
+    z-index: 0;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $gold;
+    text-shadow: 0 0 10px rgba($gold, 0.5);
+    margin-bottom: $space-md;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    color: $white;
+    margin-bottom: $space-md;
+    text-shadow: 0 0 30px rgba($white, 0.1);
+  }
+
+  &__subtitle {
+    color: $gray-light;
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: $space-lg;
+  }
+}
+
+.accent-neon {
+  @include neon-text($pink-neon);
+}
+
+// Filters
+.cocktails-filters {
+  padding: $space-xl 0;
+  background: $black-soft;
+  border-bottom: 1px solid rgba($pink-neon, 0.1);
+  position: sticky;
+  top: 70px;
+  z-index: 10;
+
+  &__bar {
+    display: flex;
+    gap: $space-sm;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-xs;
+    padding: $space-sm $space-lg;
+    background: $black-card;
+    color: $gray-light;
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-pill;
+    font-family: $font-body;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all $transition-base;
+
+    &:hover {
+      border-color: rgba($pink-neon, 0.4);
+      color: $white;
+    }
+
+    &--active {
+      background: rgba($pink-neon, 0.15);
+      border-color: $pink-neon;
+      color: $pink-neon;
+      box-shadow: 0 0 15px rgba($pink-neon, 0.2);
+    }
+  }
+}
+
+// Grid
+.cocktails-grid-section {
+  padding: $space-3xl 0;
+}
+
+.cocktails-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-xl;
+
+  @media (max-width: #{$desktop}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: #{$tablet}) {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+.cocktail-full-card {
+  background: $black-card;
+  border: 1px solid rgba($gold, 0.15);
+  border-radius: $radius-lg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: rgba($gold, 0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba($black, 0.6), 0 0 30px rgba($gold, 0.08);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover { transform: none; }
+  }
+
+  &__header {
+    background: linear-gradient(135deg, rgba($pink-dark, 0.4), rgba($black-soft, 0.8));
+    padding: $space-xl;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba($pink-neon, 0.1);
+    position: relative;
+  }
+
+  &__badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $gold;
+    border: 1px solid rgba($gold, 0.5);
+    border-radius: $radius-pill;
+    padding: 2px $space-sm;
+  }
+
+  &__emoji {
+    font-size: 3rem;
+    display: block;
+    text-align: center;
+    flex: 1;
+  }
+
+  &__price-tag {
+    font-family: $font-display;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: $gold;
+    text-shadow: 0 0 10px rgba($gold, 0.5);
+  }
+
+  &__body {
+    padding: $space-xl;
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+    flex: 1;
+  }
+
+  &__name {
+    font-family: $font-display;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $white;
+    line-height: 1.2;
+  }
+
+  &__warning {
+    color: $pink-glow;
+    font-size: 0.82rem;
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+  }
+
+  &__desc {
+    color: $gray-light;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  &__ingredients {
+    background: rgba($black, 0.3);
+    border-radius: $radius-md;
+    padding: $space-md;
+    border: 1px solid rgba($white, 0.05);
+  }
+
+  &__ingredients-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $pink-neon;
+    margin-bottom: $space-sm;
+  }
+
+  &__ingredients-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-xs;
+
+    li {
+      font-size: 0.78rem;
+      color: $gray-light;
+      background: rgba($white, 0.05);
+      border-radius: $radius-pill;
+      padding: 2px $space-sm;
+    }
+  }
+
+  &__footer {
+    padding: $space-md $space-xl;
+    border-top: 1px solid rgba($white, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__cat {
+    font-size: 0.7rem;
+    color: $gray-mid;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+}
+
+.cocktails-empty {
+  @include flex-col-center;
+  gap: $space-md;
+  padding: $space-4xl;
+  color: $gray-mid;
+  font-size: 1.1rem;
+
+  span { font-size: 4rem; }
+}
+
+.cocktails-disclaimer {
+  padding: $space-2xl $space-xl;
+  text-align: center;
+  background: $black-soft;
+  border-top: 1px solid rgba($white, 0.04);
+
+  p {
+    color: $gray-mid;
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+}

@@ -1,0 +1,198 @@
+<div class="contact-page">
+  <!-- Header -->
+  <header class="contact-header">
+    <div class="container">
+      <p class="contact-header__eyebrow">
+        <span aria-hidden="true">★</span> On est quelque part <span aria-hidden="true">★</span>
+      </p>
+      <h1 class="contact-header__title">
+        Nous <span class="accent-pink">Trouver</span>
+      </h1>
+      <p class="contact-header__subtitle">
+        Zone de perdition nocturne — proche des autres bars (pour voler leur clientèle)
+      </p>
+      <div class="neon-divider"></div>
+    </div>
+  </header>
+
+  <div class="contact-body">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Info column -->
+        <div class="contact-info">
+          <section class="contact-info__section" aria-labelledby="address-title">
+            <h2 class="contact-info__title" id="address-title">
+              <span aria-hidden="true">📍</span> Où on est ?
+            </h2>
+            <address class="contact-info__address">
+              <p>Zone de perdition nocturne</p>
+              <p>Proche des autres bars</p>
+              <p>(loyer pas cher, rideaux épais)</p>
+            </address>
+          </section>
+
+          <section class="contact-info__section" aria-labelledby="hours-title">
+            <h2 class="contact-info__title" id="hours-title">
+              <span aria-hidden="true">🕐</span> Horaires
+            </h2>
+            <dl class="contact-info__hours">
+              <div class="contact-info__hours-row">
+                <dt>Lundi — Mercredi</dt>
+                <dd>On est fatigués</dd>
+              </div>
+              <div class="contact-info__hours-row">
+                <dt>Jeudi</dt>
+                <dd>18h — 2h (soirée cirque)</dd>
+              </div>
+              <div class="contact-info__hours-row">
+                <dt>Vendredi</dt>
+                <dd>18h — 4h (si pas d'incendie)</dd>
+              </div>
+              <div class="contact-info__hours-row contact-info__hours-row--highlight">
+                <dt>Samedi</dt>
+                <dd>20h — ∞</dd>
+              </div>
+              <div class="contact-info__hours-row">
+                <dt>Dimanche</dt>
+                <dd>Brunch 11h — 16h (rédemption)</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="contact-info__section" aria-labelledby="social-title">
+            <h2 class="contact-info__title" id="social-title">
+              <span aria-hidden="true">📱</span> Réseaux
+            </h2>
+            <div class="contact-info__socials">
+              <a class="contact-info__social-link" href="#" aria-label="Instagram de La Bar à Babar">
+                <span aria-hidden="true">📸</span> Instagram
+              </a>
+              <a class="contact-info__social-link" href="#" aria-label="TikTok de La Bar à Babar">
+                <span aria-hidden="true">🎵</span> TikTok
+              </a>
+              <a class="contact-info__social-link" href="#" aria-label="Facebook de La Bar à Babar">
+                <span aria-hidden="true">👥</span> Facebook
+              </a>
+            </div>
+          </section>
+
+          <div class="contact-info__fun-fact">
+            <span aria-hidden="true">🐘</span>
+            <p>
+              <strong>Conseil :</strong> Venez avec des amis.
+              Ou seul. On ne juge pas. Notre videur a fait de la prison,
+              lui non plus on ne l'a pas jugé.
+            </p>
+          </div>
+        </div>
+
+        <!-- Form column -->
+        <div class="contact-form-col">
+          @if (submitted()) {
+            <div class="contact-success" role="alert">
+              <span class="contact-success__icon" aria-hidden="true">🐘</span>
+              <h2 class="contact-success__title">Message envoyé !</h2>
+              <p>On a bien reçu votre message. On vous répondra dès qu'on sera sobres.</p>
+              <button class="contact-success__reset" (click)="submitted.set(false)">
+                Envoyer un autre message
+              </button>
+            </div>
+          } @else {
+            <form
+              class="contact-form"
+              [formGroup]="form"
+              (ngSubmit)="onSubmit()"
+              novalidate
+              aria-label="Formulaire de contact"
+            >
+              <h2 class="contact-form__title">Nous Contacter</h2>
+              <p class="contact-form__subtitle">On répond (parfois).</p>
+
+              <div class="contact-form__group">
+                <label class="contact-form__label" for="name">
+                  Votre nom <span class="contact-form__required" aria-hidden="true">*</span>
+                </label>
+                <input
+                  class="contact-form__input"
+                  [class.contact-form__input--error]="isInvalid('name')"
+                  id="name"
+                  type="text"
+                  formControlName="name"
+                  placeholder="Jean-Michel Babar"
+                  autocomplete="name"
+                  [attr.aria-invalid]="isInvalid('name')"
+                  aria-describedby="name-error"
+                />
+                @if (isInvalid('name')) {
+                  <p class="contact-form__error" id="name-error" role="alert">
+                    Merci d'entrer votre nom (2 caractères minimum)
+                  </p>
+                }
+              </div>
+
+              <div class="contact-form__group">
+                <label class="contact-form__label" for="email">
+                  Email <span class="contact-form__required" aria-hidden="true">*</span>
+                </label>
+                <input
+                  class="contact-form__input"
+                  [class.contact-form__input--error]="isInvalid('email')"
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  placeholder="babar@savane.com"
+                  autocomplete="email"
+                  [attr.aria-invalid]="isInvalid('email')"
+                  aria-describedby="email-error"
+                />
+                @if (isInvalid('email')) {
+                  <p class="contact-form__error" id="email-error" role="alert">
+                    Merci d'entrer un email valide
+                  </p>
+                }
+              </div>
+
+              <div class="contact-form__group">
+                <label class="contact-form__label" for="message">
+                  Message <span class="contact-form__required" aria-hidden="true">*</span>
+                </label>
+                <textarea
+                  class="contact-form__textarea"
+                  [class.contact-form__input--error]="isInvalid('message')"
+                  id="message"
+                  formControlName="message"
+                  rows="5"
+                  placeholder="Je voudrais réserver une table / organiser une soirée / récupérer ma dignité..."
+                  [attr.aria-invalid]="isInvalid('message')"
+                  aria-describedby="message-error"
+                ></textarea>
+                @if (isInvalid('message')) {
+                  <p class="contact-form__error" id="message-error" role="alert">
+                    Merci d'entrer un message (10 caractères minimum)
+                  </p>
+                }
+              </div>
+
+              <button
+                class="contact-form__submit"
+                type="submit"
+                [disabled]="sending()"
+              >
+                @if (sending()) {
+                  <span aria-live="polite">Envoi en cours...</span>
+                } @else {
+                  Envoyer le message 🐘
+                }
+              </button>
+
+              <p class="contact-form__disclaimer">
+                * Champs obligatoires. Vos données ne seront pas vendues, on n'a pas assez de clients pour ça.
+              </p>
+            </form>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="cocktails-page">
+  <!-- Page Header -->
+  <header class="cocktails-header">
+    <div class="cocktails-header__bg" aria-hidden="true"></div>
+    <div class="container cocktails-header__content">
+      <p class="cocktails-header__eyebrow">
+        <span aria-hidden="true">★</span> Sélection du moment <span aria-hidden="true">★</span>
+      </p>
+      <h1 class="cocktails-header__title">
+        La <span class="accent-neon">Carte</span>
+      </h1>
+      <p class="cocktails-header__subtitle">
+        Des créations douteuses, assumées avec passion
+      </p>
+      <div class="neon-divider"></div>
+    </div>
+  </header>
+
+  <!-- Filters -->
+  <section class="cocktails-filters" aria-label="Filtres par catégorie">
+    <div class="container">
+      <div class="cocktails-filters__bar" role="list">
+        @for (filter of filters; track filter.value) {
+          <button
+            class="cocktails-filters__btn"
+            [class.cocktails-filters__btn--active]="activeFilter() === filter.value"
+            (click)="setFilter(filter.value)"
+            role="listitem"
+            [attr.aria-pressed]="activeFilter() === filter.value"
+          >
+            <span aria-hidden="true">{{ filter.emoji }}</span>
+            {{ filter.label }}
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Cocktails Grid -->
+  <section class="cocktails-grid-section" aria-live="polite" aria-label="Liste des cocktails">
+    <div class="container">
+      @if (filteredCocktails().length === 0) {
+        <div class="cocktails-empty">
+          <span aria-hidden="true">🐘</span>
+          <p>Aucun cocktail dans cette catégorie pour le moment.</p>
+        </div>
+      } @else {
+        <div class="cocktails-grid">
+          @for (cocktail of filteredCocktails(); track cocktail.id) {
+            <article class="cocktail-full-card">
+              <div class="cocktail-full-card__header">
+                <div class="cocktail-full-card__badge">{{ cocktail.badge }}</div>
+                <span class="cocktail-full-card__emoji" aria-hidden="true">{{ cocktail.emoji }}</span>
+                <div class="cocktail-full-card__price-tag">{{ cocktail.price }}€</div>
+              </div>
+
+              <div class="cocktail-full-card__body">
+                <h2 class="cocktail-full-card__name">{{ cocktail.name }}</h2>
+                <p class="cocktail-full-card__warning">
+                  <span aria-hidden="true">⚠️</span>
+                  <em>{{ cocktail.warning }}</em>
+                </p>
+                <p class="cocktail-full-card__desc">{{ cocktail.description }}</p>
+
+                <div class="cocktail-full-card__ingredients">
+                  <h3 class="cocktail-full-card__ingredients-title">Composition :</h3>
+                  <ul class="cocktail-full-card__ingredients-list" role="list">
+                    @for (ingredient of cocktail.ingredients; track ingredient) {
+                      <li>{{ ingredient }}</li>
+                    }
+                  </ul>
+                </div>
+              </div>
+
+              <div class="cocktail-full-card__footer">
+                <span class="cocktail-full-card__cat">{{ cocktail.category }}</span>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <div class="cocktails-disclaimer">
+    <div class="container">
+      <p>
+        <span aria-hidden="true">⚠️</span>
+        L'abus d'alcool est dangereux pour la santé. Boire avec modération.
+        * si pas de contrôle fiscal et pas d'incendie.
+      </p>
+    </div>
+  </div>
+</div>

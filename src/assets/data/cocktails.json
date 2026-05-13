@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "Le Babar Splash",
+    "description": "Notre signature. Ça pique, ça brûle, on en redemande. Un mélange explosif pour les courageux.",
+    "price": 10,
+    "warning": "ça pique",
+    "emoji": "🐘",
+    "category": "signature",
+    "ingredients": ["Vodka", "Sirop de grenadine", "Jus de citron", "Piment de Cayenne", "Paillettes comestibles"],
+    "badge": "Signature"
+  },
+  {
+    "id": 2,
+    "name": "Le Tuyau d'Arrosage",
+    "description": "Servi directement dans un vrai tuyau. Parce que les verres c'est trop banal. Format unique, goût douteux assumé.",
+    "price": 12,
+    "warning": "servi dans un tuyau",
+    "emoji": "🚿",
+    "category": "special",
+    "ingredients": ["Rhum blanc", "Mojito maison", "Menthe fraîche", "Citron vert", "Sucre de canne"],
+    "badge": "Format Spécial"
+  },
+  {
+    "id": 3,
+    "name": "Le G avec Tuyau",
+    "description": "À la demande. On ne pose pas de questions. Pour les initiés et les curieux très motivés.",
+    "price": 15,
+    "warning": "à la demande",
+    "emoji": "🤫",
+    "category": "mystere",
+    "ingredients": ["???", "???", "???", "Surprise", "Dignité optionnelle"],
+    "badge": "Mystère"
+  },
+  {
+    "id": 4,
+    "name": "Litre de Dé",
+    "description": "Pour les warriors. Un litre, un dé à jouer, une promesse. On lève nos verres aux insensés.",
+    "price": 20,
+    "warning": "pour les warriors",
+    "emoji": "🎲",
+    "category": "warrior",
+    "ingredients": ["Bière pression", "Tequila", "Schnaps", "Larmes de fierté", "Un dé (fourni)"],
+    "badge": "Warriors Only"
+  },
+  {
+    "id": 5,
+    "name": "JP Chénet Royal",
+    "description": "Parce qu'on le vaut bien. Du JP Chénet. C'est tout. Servi avec classe et sans honte.",
+    "price": 8,
+    "warning": "parce qu'on le vaut bien",
+    "emoji": "🍾",
+    "category": "classique",
+    "ingredients": ["JP Chénet", "Glaçons (optionnel)", "Fierté assumée"],
+    "badge": "Classique"
+  },
+  {
+    "id": 6,
+    "name": "Le Rose des Savanes",
+    "description": "Doux comme un éléphant en tutus. Pétillant, fruité, légèrement mensonger sur ses effets.",
+    "price": 9,
+    "warning": "traître",
+    "emoji": "🌸",
+    "category": "doux",
+    "ingredients": ["Rosé pétillant", "Sirop de litchi", "Rose comestible", "Fausse innocence"],
+    "badge": "Doux"
+  }
+]
