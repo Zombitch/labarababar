@@ -24,7 +24,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.cocktailService.getCocktails().subscribe((cocktails) => {
-      this.featuredCocktails.set(cocktails.slice(0, 3));
+      // One representative cocktail per category
+      const categories = ['signature', 'warrior', 'doux', 'special', 'mystere', 'classique'] as const;
+      const picks = categories
+        .map((cat) => cocktails.find((c) => c.category === cat))
+        .filter((c): c is Cocktail => c !== undefined)
+        .slice(0, 3);
+      this.featuredCocktails.set(picks);
     });
   }
 }
